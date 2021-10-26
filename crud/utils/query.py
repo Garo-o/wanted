@@ -18,10 +18,10 @@ update_user = '''update user set password=? where id=?'''
 
 select_board_by_id = '''select * from board where id =?'''
 select_board_all = '''select * from board'''
-select_board_offset = '''select title, writer, regdate, hit  from board limit ? offset ?'''
+select_board_offset = '''select *  from board order by regdate desc limit ? offset ?'''
 
 insert_board = '''insert into board(title,context,writer,regdate,hit) values(?,?,?,datetime('now','localtime'),0)'''
 
 delete_board_by_id = '''delete from board where id = ?'''
 
-update_board = '''update user set title=?, context=?, regdate=datetime('now','localtime') where id=?'''
+update_board = '''update board set title=?, context=?,hit=? where id=?'''

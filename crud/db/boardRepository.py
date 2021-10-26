@@ -49,6 +49,6 @@ def remove(id):
 def update(board):
     conn = sqlite3.connect(db)
     cursor = conn.cursor()
-    cursor.execute(query.update_board, (board.title, board.context, board.id))
+    cursor.execute(query.update_board, (board.title, board.context, board.hit, board.id))
     conn.commit()
     conn.close()
