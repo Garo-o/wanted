@@ -27,6 +27,7 @@
 
 ## API
 ### user
++ __baseURL : http://localhost:5000
 + __/auth/login__
 <pre>
 <code>
@@ -117,7 +118,7 @@ response : {"result": "success", "data": {"id": 1, "email": "admin", "roles": ["
 <pre>
 <code>
 회원 수정 (본인만 가능)
-POSTT
+POST
 Header: {Authorization: "Bearer token"}
 request : {"password": string}
 response : {"result": string}
