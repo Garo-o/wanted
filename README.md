@@ -30,8 +30,8 @@
 </pre>
 
 ## API
+### baseURL: "http://localhost:5000"
 ### user
-+ __baseURL__ : "http://localhost:5000"
 + __/auth/login__
 <pre>
 <code>
