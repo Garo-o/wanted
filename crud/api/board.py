@@ -76,7 +76,7 @@ class BoardApi2(Resource):
 
     def get(self, param):
         limit = 5
-        offset = param-1
+        offset = (param-1)*limit
         boards = findByOffsetWithLimit(offset, limit)
         cnt = len(boards)
         data = [Board(i[0], i[1], i[2], i[3], i[4], i[5]).json2() for i in boards]
@@ -114,6 +114,8 @@ class BoardApi3(Resource):
             isExistBoard(one)
         except Exception as e:
             return jsonify(result="fail", error=e.args[0])
-
-        data = Board(one[0], one[1], one[2], one[3], one[4], one[5]).json()
+        board = Board(one[0], one[1], one[2], one[3], one[4], one[5])
+        board.hit += 1
+        data = board.json()
+        update(board)
         return jsonify(result="success", data=data)
