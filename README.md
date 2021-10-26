@@ -5,11 +5,15 @@
 	cd wanted/crud
 	flask run
 	
-
 ## 개발 환경
 + Language: Python 3.9
 + Framework: Flask
 + DataBase: SQLITE3
+
+## 구현 방법
+	 인증, 인가를 위해 jwt를 사용하였으며, role을 jwt claim에 넣어 역할별 사용할 수 있는 기능을 달리 했습니다.
+	 rest end point는 flask_restful에 있는 Api의 add_resource()를 통해 클라스별로 구분하여 구현하였습니다.
+	
 
 ## 도메인
 + *USER*
