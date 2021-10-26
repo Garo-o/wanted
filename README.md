@@ -198,3 +198,22 @@ request : {"title": "new board", "context": "asdasd"}
 response : {"result": "success", "data": {"id": 4,"title": "new board", "context": "asdasd", "writer": "admin", "regdate": "2021-10-27 12:34:56", "hit": 4}}
 </code>
 </pre>
+
+
++ __/board/get/{param}__
+<pre>
+<code>
+param = board_id
+
+게시글 조회
+GET
+request : {}
+response : {"result": string, "data":  board}
+
+예시
+request : {}
+response : {"result": "success", "data": {"id": 4,"title": "제목", "context": "내용", "writer": "admin", "regdate": "2021-10-27 12:34:56", "hit": 4}}
+</code>
+</pre>
+
+
