@@ -37,8 +37,10 @@ class BoardApi1(Resource):
         context = request.json.get('context')
         writer = get_jwt_identity()
 
-        permit(Board(0, title, context, writer, '', 0))
-        return jsonify(result="success")
+        id = permit(Board(0, title, context, writer, '', 0))
+        board_ = findById(id)
+        board = Board(board_[0],board_[1],board_[2],board_[3],board_[4],board_[5])
+        return jsonify(result="success", data=board.json())
 
     """
     get all boards list
@@ -92,12 +94,13 @@ class BoardApi2(Resource):
             isMe(board_[3])
         except Exception as e:
             return jsonify(result="fail", error=e.args[0])
-
+        board = Board(board_[0],board_[1],board_[2],board_[3],board_[4],board_[5])
         title = request.json.get('title')
         context = request.json.get('context')
-
-        update(Board(param, title, context, '', '', 0))
-        return jsonify(result="success")
+        board.title = title
+        board.context = context
+        update(board)
+        return jsonify(result="success", data=board.json())
 
 
 ### http://localhost:5000/board/get/<int:param>

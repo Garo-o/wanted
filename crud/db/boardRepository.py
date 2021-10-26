@@ -32,8 +32,10 @@ def permit(board):
     conn = sqlite3.connect(db)
     cursor = conn.cursor()
     cursor.execute(query.insert_board, (board.title,board.context,board.writer))
+    id = cursor.lastrowid
     conn.commit()
     conn.close()
+    return id
 
 
 def remove(id):
