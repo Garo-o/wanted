@@ -27,7 +27,7 @@
 
 ## API
 ### user
-+ __baseURL : http://localhost:5000
++ __baseURL__ : "http://localhost:5000"
 + __/auth/login__
 <pre>
 <code>
