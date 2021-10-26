@@ -7,3 +7,6 @@ class User(object):
 
     def json(self):
         return {'id': self.id, 'email': self.email, 'password': self.password, 'roles': self.roles}
+
+    def json2(self):
+        return {'id': self.id, 'email': self.email, 'roles': self.roles}

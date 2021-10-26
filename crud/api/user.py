@@ -59,7 +59,7 @@ class UserApi1(Resource):
 
         a_ll = findALl()
         cnt = len(a_ll)
-        data = [User(i[0], i[1], i[2].split(",")).json() for i in a_ll]
+        data = [User(i[0], i[1], i[2].split(",")).json2() for i in a_ll]
         return jsonify(result="success", count=cnt, data=data)
 
 
@@ -95,7 +95,7 @@ class UserApi2(Resource):
         except Exception as e:
             return jsonify(result="fail", error=e.args[0])
 
-        data = User(by_id[0], by_id[1], by_id[2].split(",")).json()
+        data = User(by_id[0], by_id[1], by_id[2].split(",")).json2()
         return jsonify(result="success", data=data)
 
 
