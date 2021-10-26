@@ -2,15 +2,21 @@ from flask_restful import Api
 from flask import Flask
 from config import Config
 from utils import routes
+from flask_jwt_extended import JWTManager
+from api.auth import jwt_blacklist
 
 app = Flask(__name__)
-app.config['JSON_SORT_KEYS']=False
-app.config['JWT_SECRET_KEY'] = Config.JWT_SECRET_KEY
-app.config['JWT_ACCESS_TOKEN_EXPIRES'] = Config.JWT_ACCESS_TOKEN_EXPIRES
-app.config['JWT_REFRESH_TOKEN_EXPIRES'] = Config.JWT_REFRESH_TOKEN_EXPIRES
+app.config.from_object(Config)
 api = Api(app)
+jwt = JWTManager(app)
+
+@jwt.token_in_blocklist_loader
+def check_if_token_is_revoked(jwt_header, jwt_payload):
+    jti = jwt_payload['jti']
+    return jti in jwt_blacklist
+
 
 routes.init_routes(api)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
