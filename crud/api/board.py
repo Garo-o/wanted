@@ -37,22 +37,16 @@ class BoardApi1(Resource):
         context = request.json.get('context')
         writer = get_jwt_identity()
 
-        permit(Board(0, title, context, writer, '', ''))
+        permit(Board(0, title, context, writer, '', 0))
         return jsonify(result="success")
 
     """
-    get all boards
-    @ADMIN
+    get all boards list
     """
-    @jwt_required()
     def get(self):
-        try:
-            isAdmin(get_jwt())
-        except Exception as e:
-            return jsonify(result="fail", error=e.args[0])
         a_ll = findALl()
         cnt = len(a_ll)
-        data = [Board(i[0], i[1], i[2], i[3], i[4], i[5]).json() for i in a_ll]
+        data = [Board(i[0], i[1], i[2], i[3], i[4], i[5]).json2() for i in a_ll]
         return jsonify(result="success", count=cnt, data=data)
 
 ### http://localhost:5000/board/<int:param>
@@ -75,7 +69,7 @@ class BoardApi2(Resource):
         return jsonify(result="success")
 
     '''
-    find limit boards from (param-1)*limit , limit=5
+    find boards list from (param-1)*limit , limit=5
     '''
 
     def get(self, param):
@@ -83,7 +77,7 @@ class BoardApi2(Resource):
         offset = param-1
         boards = findByOffsetWithLimit(offset, limit)
         cnt = len(boards)
-        data = [Board(i[0], i[1], i[2], i[3], i[4], i[5]).json() for i in boards]
+        data = [Board(i[0], i[1], i[2], i[3], i[4], i[5]).json2() for i in boards]
         return jsonify(result="success", count=cnt, data=data)
 
     '''
@@ -102,7 +96,7 @@ class BoardApi2(Resource):
         title = request.json.get('title')
         context = request.json.get('context')
 
-        update(Board(param, title, context, '', '', ''))
+        update(Board(param, title, context, '', '', 0))
         return jsonify(result="success")
 
 
@@ -110,13 +104,11 @@ class BoardApi2(Resource):
 class BoardApi3(Resource):
     '''
     find one by id
-    @ADMIN
     '''
     def get(self, param):
         one = findById(param)
         try:
             isExistBoard(one)
-            isAdmin(get_jwt())
         except Exception as e:
             return jsonify(result="fail", error=e.args[0])
 

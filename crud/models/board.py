@@ -1,11 +1,14 @@
 class Board(object):
-    def __init__(self, id, title, context, writer, regdate, fixdate):
+    def __init__(self, id, title, context, writer, regdate, hit):
         self.id = id
         self.title = title
         self.context = context
         self.writer = writer
         self.regdate = regdate
-        self.fixdate = fixdate
+        self.hit = hit
 
     def json(self):
-        return {'id': self.id, 'title':self.title, 'context':self.context, 'writer':self.writer, 'regdate': self.regdate, 'fixdate': self.fixdate}
+        return {'id': self.id, 'title':self.title, 'context':self.context, 'writer':self.writer, 'regdate': self.regdate, 'hit': self.hit}
+
+    def json2(self):
+        return {'id': self.id, 'title': self.title, 'writer': self.writer, 'regdate': self.regdate, 'hit': self.hit}
